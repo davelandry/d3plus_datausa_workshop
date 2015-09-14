@@ -17,7 +17,7 @@
 
   <script>
 
-  // sample data array
+  // Sample data array
   var sample_data = [
     {"value": 100, "name": "alpha"},
     {"value": 70, "name": "beta"},
@@ -27,26 +27,32 @@
     {"value": 1, "name": "zeta"}
   ]
 
-  // step 1 solution - drawing the tree map
-  var visualization = d3plus.viz()
+  // Instantiate a D3plus visualization
+  var visualization = d3plus.viz();
+
+  // Step 1: Create a tree map
+  // Hint: This will be very similar to pie.html
+  visualization
     .container("#viz")  // container DIV to hold the visualization
-    .data(sample_data)  // data to use with the visualization
     .type("tree_map")   // visualization type
+    .data(sample_data)  // data to use with the visualization
     .id("name")         // key for which our data is unique on
     .size("value")      // sizing of blocks
-    .text("name")       // explicitly set text for labels
+    .draw()             // draw the visualization!
 
-  // step 2 solution - align labels to top left
-  visualization.labels({"align":"left", "valign": "top"})
+  // Step 2: Put the labels in the top left corner
+  // Hint: You may need to look at the documentation
+  // https://github.com/alexandersimoes/d3plus/wiki/Visualizations#labels
+  // -- visualization.labels({"align":"left", "valign": "top"}).draw()
 
-  // step 3 solution - change the font
-  visualization.font("serif")
+  // Step 3: Change the font
+  // Hint: You may need to look at the documentation
+  // https://github.com/alexandersimoes/d3plus/wiki/Visualizations#font
+  // -- visualization.font("serif").draw()
 
-  // step 3 solution - create a title
-  visualization.title("My favorite GREEK letters: ordered by love")
-
-  // finally, draw the visualization!
-  visualization.draw()
+  // Step 4: Create a title for your visualization
+  // Hint: NO HINT! (I think you know where to go now)
+  // -- visualization.title("My favorite GREEK letters: ordered by love").draw();
 
   </script>
 </body>
