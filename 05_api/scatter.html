@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Scatter Plot using DataUSA IPEDs API</title>
+
+  <!-- load D3js -->
+  <script src="/js/d3.js"></script>
+
+  <!-- load D3plus after D3js -->
+  <script src="/js/d3plus.js"></script>
+
+</head>
+
+<body>
+
+  <div id="viz"></div>
+
+  <script>
+
+    function datafold(data) {
+      return data.data.map(function(d){
+        return d.reduce(function(obj, v, i){
+          obj[data.headers[i]] = v;
+          return obj;
+        }, {});
+      });
+    }
+
+    // Step 1: Make a Scatter Plot comparing male/female graduation numbers
+    var visualization = d3plus.viz()
+      .container("#viz")
+      .type("scatter")
+      .attrs("http://usa.datawheel.us:5000/attrs/cip/", function(data){
+        data = datafold(data);
+        var return_obj = {"group": [], "cip": []};
+        data.forEach(function(d){
+          d.cip = d.id;
+          d.group = d.cip.slice(0,2);
+          if (d.id.length === 2) return_obj.group.push(d);
+          else if (d.id.length === 6) return_obj.cip.push(d);
+        });
+        return return_obj;
+      })
+      .data("http://usa.datawheel.us:5000/api/?sumlevel=6&show=cip&university=167358&required=grads_total,grads_men,grads_women", function(data){
+        data = datafold(data);
+        data.forEach(function(d){
+          d.group = d.cip.slice(0,2);
+        });
+        return data;
+      })
+      .id(["group", "cip"])
+      .size("grads_total")
+      .x("grads_men")
+      .y("grads_women")
+      .text("name")
+      .color("group")
+      .format({"text": function(text){
+        if (text === "grads_total") return "Total Graduates";
+        if (text === "grads_men") return "Male Graduates";
+        if (text === "grads_women") return "Female Graduates";
+        return d3plus.string.title(text);
+      }})
+      .draw();
+
+    // Step 2: Mirror the X and Y axes
+    // -- visualization.axes({"mirror": true})
+
+    // Step 2: Enable legend filters to hide certain groups
+    // -- visualization.legend({"filters": true})
+
+  </script>
+</body>
