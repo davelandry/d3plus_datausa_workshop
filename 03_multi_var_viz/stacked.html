@@ -1,49 +1,50 @@
 <!doctype html>
 <html>
- 
+
 <head>
   <meta charset="utf-8">
   <title>Multiple Variable Visualizations: Stacked Area Chart</title>
- 
+
   <!-- load D3js -->
   <script src="/js/d3.js"></script>
- 
+
   <!-- load D3plus after D3js -->
   <script src="/js/d3plus.js"></script>
-</head>
- 
-<body>
-  <div id="viz"></div>
-  
-  <script>
-    
-  // sample data array
-  var data = [
-    {"year": 1991, "name":"alpha", "value": 15, "parent": "parent 1", "complete":0.8},
-    {"year": 1992, "name":"alpha", "value": 20, "parent": "parent 1", "complete":0.1},
-    {"year": 1993, "name":"alpha", "value": 30, "parent": "parent 1", "complete":0.35},
-    {"year": 1994, "name":"alpha", "value": 60, "parent": "parent 1", "complete":0.15},
-    {"year": 1991, "name":"beta", "value": 10, "parent": "parent 1", "complete":0.7},
-    {"year": 1992, "name":"beta", "value": 10, "parent": "parent 1", "complete":0.2},
-    {"year": 1993, "name":"beta", "value": 40, "parent": "parent 1", "complete":0.25},
-    {"year": 1994, "name":"beta", "value": 60, "parent": "parent 1", "complete":0.25},
-    {"year": 1991, "name":"gamma", "value": 5, "parent": "parent 2", "complete":0.96},
-    {"year": 1992, "name":"gamma", "value": 10, "parent": "parent 2", "complete":0.44},
-    {"year": 1993, "name":"gamma", "value": 20, "parent": "parent 2", "complete":0.8},
-    {"year": 1994, "name":"gamma", "value": 25, "parent": "parent 2", "complete":0.12},
-    {"year": 1991, "name":"delta", "value": 50, "parent": "parent 2", "complete":0.05},
-    {"year": 1992, "name":"delta", "value": 43, "parent": "parent 2", "complete":0.65},
-    {"year": 1993, "name":"delta", "value": 17, "parent": "parent 2", "complete":0.2},
-    {"year": 1994, "name":"delta", "value": 32, "parent": "parent 2", "complete":0.75}
-  ]
 
-   
-  // Step 1: Use everything you know to create a nested stacked area chart
-  // Consult the bar.html, need an X and Y axis
-  
-  // Step 2: change the line interpolation
-  
-  // Step 3: change the y scale to a "share" layout
-   
+</head>
+
+<body>
+
+  <div id="viz"></div>
+
+  <script>
+
+    // Sample data array
+    var sample_data = [
+      {"year": 1991, "name": "alpha", "value": 15, "parent": "parent 1", "complete": 0.8},
+      {"year": 1992, "name": "alpha", "value": 20, "parent": "parent 1", "complete": 0.1},
+      {"year": 1993, "name": "alpha", "value": 30, "parent": "parent 1", "complete": 0.35},
+      {"year": 1994, "name": "alpha", "value": 60, "parent": "parent 1", "complete": 0.15},
+      {"year": 1991, "name": "beta", "value": 10, "parent": "parent 1", "complete": 0.7},
+      {"year": 1992, "name": "beta", "value": 10, "parent": "parent 1", "complete": 0.2},
+      {"year": 1993, "name": "beta", "value": 40, "parent": "parent 1", "complete": 0.25},
+      {"year": 1994, "name": "beta", "value": 60, "parent": "parent 1", "complete": 0.25},
+      {"year": 1991, "name": "gamma", "value": 5, "parent": "parent 2", "complete": 0.96},
+      {"year": 1992, "name": "gamma", "value": 10, "parent": "parent 2", "complete": 0.44},
+      {"year": 1993, "name": "gamma", "value": 20, "parent": "parent 2", "complete": 0.8},
+      {"year": 1994, "name": "gamma", "value": 25, "parent": "parent 2", "complete": 0.12},
+      {"year": 1991, "name": "delta", "value": 50, "parent": "parent 2", "complete": 0.05},
+      {"year": 1992, "name": "delta", "value": 43, "parent": "parent 2", "complete": 0.65},
+      {"year": 1993, "name": "delta", "value": 17, "parent": "parent 2", "complete": 0.2},
+      {"year": 1994, "name": "delta", "value": 32, "parent": "parent 2", "complete": 0.75}
+    ];
+
+    // Step 1: Create a nested stacked area chart
+
+    // Step 2: Make the lines have smooth curves
+    // Hint: it's called "line interpolation" :-)
+
+    // Step 3: Change the y scale to a "share" layout
+
   </script>
 </body>

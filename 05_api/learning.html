@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>DataUSA API</title>
+
+  <!-- load D3js -->
+  <script src="/js/d3.js"></script>
+
+  <!-- load D3plus after D3js -->
+  <script src="/js/d3plus.js"></script>
+
+  <style>
+
+    select {
+      width: 200px;
+    }
+    table {
+      margin: 10px 0 40px 0;
+    }
+    table td, table th {
+      padding: 4px;
+      margin: 2px;
+      text-align: left;
+    }
+    input {
+      width: 800px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <p>http://usa.datawheel.us:5000/api/?parameters</p>
+
+  <table>
+    <tr>
+      <th>Output</th>
+      <td>show</td>
+      <td>
+        <select class="freq">
+          <option value="university">Universities</option>
+          <option value="cip">Courses</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th>Course ID</th>
+      <td>cip</td>
+      <td>
+        <select class="cip">
+          <option value="all">All Courses</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th>University ID</th>
+      <td>university</td>
+      <td>
+        <select class="university">
+          <option value="all">All Universities</option>
+        </select>
+      </td>
+    </tr>
+  </table>
+
+  <button>Get URL</button>
+  <input value=""></input>
+
+  <script>
+
+  function datafold(data) {
+    return data.data.map(function(d){
+      return d.reduce(function(obj, v, i){
+        obj[data.headers[i]] = v;
+        return obj;
+      }, {});
+    });
+  }
+
+  d3.json("http://usa.datawheel.us:5000/attrs/cip/", function(err, data){
+    data = datafold(data).sort(function(a, b){
+      if(a.id < b.id) return -1;
+      if(a.id > b.id) return 1;
+      return 0;
+    });
+    d3.select("select.cip").selectAll("option")
+      .data(data).enter()
+      .append("option")
+      .attr("value", function(d){
+        return d["id"]
+      })
+      .text(function(d){
+        return d["id"] + " - " + d["name"];
+      });
+  });
+
+  d3.json("http://usa.datawheel.us:5000/attrs/university/", function(err, data){
+    data = datafold(data).sort(function(a, b){
+      if(a.name < b.name) return -1;
+      if(a.name > b.name) return 1;
+      return 0;
+    });
+    d3.select("select.university").selectAll("option")
+      .data(data).enter()
+      .append("option")
+      .attr("value", function(d){
+        return d["id"]
+      })
+      .text(function(d){
+        return d["name"];
+      });
+  });
+
+  var generateURL = function() {
+
+    var url = "http://usa.datawheel.us:5000/api/";
+    d3.selectAll("table tr").each(function(d, i){
+      var tds = d3.select(this).selectAll("td")[0];
+      var id = d3.select(tds[0]).text();
+      var val = d3.select(tds[1]).select("select").property("value");
+      if (id === "show") {
+        var depth = val === "cip" ? "6" : "all";
+        url += "?sumlevel=" + depth;
+      }
+      if (val !== "all") {
+        url += "&" + id + "=" + val;
+      }
+    })
+    d3.select("input").property("value", url);
+
+  }
+
+  d3.select("button").on("click", generateURL);
+  generateURL();
+
+  </script>
+</body>
