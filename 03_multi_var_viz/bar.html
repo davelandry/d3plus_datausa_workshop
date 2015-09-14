@@ -27,7 +27,7 @@
       {"value": 15, "name": "delta"},
       {"value": 5, "name": "epsilon"},
       {"value": 1, "name": "zeta"}
-    ]
+    ];
   
     // Sample data array with 2 variables
     var sample_data2 = [
@@ -47,10 +47,10 @@
       {"year": 1994, "name":"beta", "value": 60},
       {"year": 1994, "name":"gamma", "value": 25},
       {"year": 1994, "name":"delta", "value": 32}
-    ]
-  
+    ];
+
     // Step 1: Create a bar chart
-    // -- what will be the x and y axes?
+    // Hint: What will be the x and y axes?
     var visualization = d3plus.viz()
       .container("#viz")
       .type("bar")
@@ -61,7 +61,7 @@
       .draw();
   
     // Step 2: Group the bar chart by a second variable
-    // -- Now use data2 to create a "grouped" bar chart
+    // Hint: Now use "sample_data2" to create a bar chart grouped by "year"
     // -- visualization.data(data2)
     // -- visualizationvisualization.x("year")
   
@@ -72,7 +72,7 @@
     // -- visualization.y({"scale": "discrete"})
   
     // Step 4: What about a stacked bar chart?
-    // -- Which method would have this property?
+    // Hint: Which method would have this property?
     // -- visualization.x({"stacked": true})
 
   </script>
