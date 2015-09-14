@@ -10,67 +10,56 @@
 
   <!-- load D3plus after D3js -->
   <script src="/js/d3plus.js"></script>
+  
 </head>
 
 <body>
+  
   <div id="viz"></div>
 
   <script>
 
-  // create sample dataset
-  var sample_data = [
-    {"name": "alpha", "size": 10},
-    {"name": "beta", "size": 12},
-    {"name": "gamma", "size": 30},
-    {"name": "delta", "size": 26},
-    {"name": "epsilon", "size": 12},
-    {"name": "zeta", "size": 26},
-    {"name": "theta", "size": 11},
-    {"name": "eta", "size": 24}
-  ]
+    // Sample data array
+    var sample_data = [
+      {"name": "alpha", "size": 10},
+      {"name": "beta", "size": 12},
+      {"name": "gamma", "size": 30},
+      {"name": "delta", "size": 26},
+      {"name": "epsilon", "size": 12},
+      {"name": "zeta", "size": 26},
+      {"name": "theta", "size": 11},
+      {"name": "eta", "size": 24}
+    ];
+  
+    // Sample array of node connections
+    var connections = [
+      {"source": "alpha", "target": "beta", "strength": 1.25},
+      {"source": "alpha", "target": "gamma", "strength": 2.463},
+      {"source": "beta", "target": "delta", "strength": 0.823},
+      {"source": "beta", "target": "epsilon", "strength": 1.563},
+      {"source": "zeta", "target": "gamma", "strength": 3.125},
+      {"source": "theta", "target": "gamma", "strength": 0.732},
+      {"source": "eta", "target": "gamma", "strength": 2.063}
+    ];
+  
+    // Step 1: Create a Rings visualization with sizing
+    // New things to tell d3plus:
+    // -- what will be the center aka "focused" node?
+    var visualization = d3plus.viz()
+      .container("#viz")
+      .type("rings")
+      .data(sample_data)
+      .edges(connections)
+      .size("size")
+      .id("name")
+      .focus("alpha")
+      .draw();
+  
+    // Step 2: Remove the node sizing
+    // -- visualization.size(false)
 
-  // create list of node positions
-  var positions = [
-    {"name": "alpha", "x": 10, "y": 15},
-    {"name": "beta", "x": 12, "y": 24},
-    {"name": "gamma", "x": 16, "y": 18},
-    {"name": "delta", "x": 26, "y": 21},
-    {"name": "epsilon", "x": 13, "y": 4},
-    {"name": "zeta", "x": 31, "y": 13},
-    {"name": "theta", "x": 19, "y": 8},
-    {"name": "eta", "x": 24, "y": 11}
-  ]
-
-  // create list of node connections
-  var connections = [
-    {"source": "alpha", "target": "beta", "strength": 1.25},
-    {"source": "alpha", "target": "gamma", "strength": 2.463},
-    {"source": "beta", "target": "delta", "strength": 0.823},
-    {"source": "beta", "target": "epsilon", "strength": 1.563},
-    {"source": "zeta", "target": "gamma", "strength": 3.125},
-    {"source": "theta", "target": "gamma", "strength": 0.732},
-    {"source": "eta", "target": "gamma", "strength": 2.063}
-  ]
-
-  // solution to step 1 - creating the rings viz
-  var visualization = d3plus.viz()
-    .container("#viz")  // container DIV to hold the visualization
-    .type("rings")    // visualization type
-    .data(sample_data)  // sample dataset to attach to nodes
-    .nodes(positions)   // x and y position of nodes
-    .edges(connections) // list of node connections
-    .size("size")       // key to size the nodes
-    .id("name")         // key for which our data is unique on
-    .focus("alpha")     // set focus ie center node
-
-  // solution to step 2 - remove node sizing
-  visualization.size(false)
-
-  // solution to step 3 - adding labels to edges
-  visualization.edges({"label": "strength"})
-
-  // finally, draw the visualization!
-  visualization.draw()
+    // Step 3: Label the edges with the "strength" key
+    // -- visualization.edges({"label": "strength"})
 
   </script>
 </body>
