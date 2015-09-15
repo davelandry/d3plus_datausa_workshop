@@ -29,6 +29,7 @@
     }
 
     // Step 1: Make a Scatter Plot comparing male/female graduation numbers
+    // Copy/paste everything from the previous tree map, but add in .x() and .y() and change .type()
     var visualization = d3plus.viz()
       .container("#viz")
       .type("scatter")
@@ -67,7 +68,7 @@
     // Step 2: Mirror the X and Y axes
     // -- visualization.axes({"mirror": true})
 
-    // Step 2: Enable legend filters to hide certain groups
+    // Step 3: Enable legend filters to hide certain groups
     // -- visualization.legend({"filters": true})
 
   </script>
